@@ -1,0 +1,15 @@
+GUI DESIGN REVIEW – FEE PAYMENT
+
+Problems and impact:
+1. One listener for every button makes code harder to read and maintain.
+2. Business logic inside event handlers mixes UI and service responsibilities.
+3. Comparing Strings with == compares references; use equals() or equalsIgnoreCase().
+4. Missing input validation can allow blank or invalid amounts.
+5. Database access on the UI thread can freeze the window.
+6. Thread.sleep() blocks the UI and delays feedback.
+7. SQL concatenation risks injection; use PreparedStatement.
+8. Not closing resources can leak connections; use try-with-resources.
+9. Exceptions need clear feedback, not silent handling.
+10. Receipt should be available only after successful payment.
+
+Design: FeeWindow collects input and displays results; FeeService validates/processes payment; FeeRepository performs database access. Separate listeners or Swing Actions improve readability and reuse. Shared listeners reduce duplication, while separate listeners clarify distinct button actions.
